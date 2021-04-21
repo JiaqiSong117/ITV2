@@ -1,10 +1,12 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Pricing - Brand</title>
+    <meta charset="UTF-8" />
+    <title>Person Potrait</title>
+    <link rel="stylesheet" href="css/semantic.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/element.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dela+Gothic+One">
@@ -21,53 +23,150 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/Responsive-Youtube-Embed.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    <style>
+        .text {
+            font-size: 14px;
+        }
+
+        .item {
+            padding: 18px 0;
+        }
+
+        .box-card {
+            width: auto;
+        }
+
+        #table,
+        #specNode {
+            line-height: 30px;
+        }
+
+        #table>div>div {
+            display: flex;
+        }
+
+        #table>div>div .name {
+            flex: 25;
+        }
+
+        #table>div>div .url {
+            flex: 75;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><img src="assets/img/logo.png" style="width: 50px;padding: 0px;"><a class="navbar-brand logo" href="Home.html" style="font-family: Lato, sans-serif;font-weight: 666;padding: 6px 7px;">Eye Opener</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-2"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-2">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item item"><a class="nav-link" href="Home.html">HOME</a></li>
-                    <li class="nav-item item"><a class="nav-link active" href="twitteranalysis.html"><strong>TWITTER ANALYSIS</strong><br></a></li>
-                    <li class="nav-item item"><a class="nav-link" href="Research.html"><strong>RESEARCH</strong><br></a></li>
-                    <li class="nav-item item"><a class="nav-link" href="about-us.html">ABOUT</a></li>
-                    <li class="nav-item item"></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <section></section>
-    <footer class="page-footer dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h5>Get started</h5>
-                    <ul>
-                        <li><a href="Home.html">Home</a></li>
-                        <li><a href="twitteranalysis.html">Analyze News Source</a></li>
-                        <li><a href="Research.html">Research</a></li>
-                    </ul>
+    <div class="ui grid" style="margin-top: 50px;">
+        <div class="three wide column">
+            <div id="person-list" class="ui cards container">
+                <div class="card">
+                    <div class="ui center aligned content">
+                        <div class="button">
+                            <i class="user circle outline icon big"></i>
+                        </div>
+                        <div class="ui header container">Add Account</div>
+                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <h5>About us</h5>
-                    <ul>
-                        <li><a href="about-us.html">Team</a></li>
-                    </ul>
+            </div>
+            <div class="ui cards container">
+                <div class="card">
+                    <button id="combine" class="ui orange button center">Combine</button>
+                </div>
+                <div class="card">
+                    <button id="cleanAll" class="ui orange button">Clean All</button>
+                </div>
+                <div class="card">
+                    <a id="back" class="ui orange button" href="Home.html">Back To Main</a>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            <p>2021 FIT5120-MP9 EYE OPENER</p>
+        <div class="twelve wide column" style="width: 80% !important;">
+            <div class="results-panel-search">
+                <i class="twitter icon big huge blue"></i>
+                <div class="ui search">
+                    <input id="input" class="prompt" type="text" placeholder="Please input a name" />
+                </div>
+                <button id="search" class="ui primary button">Search</button>
+                <div id="progress" class="ui right float loader"></div>
+            </div>
+            <div id="container" class="results-panel-charts">
+
+            </div>
+
+            <div id="app" style="padding: 30px 10px 50px; width: 100%; display: flex">
+                <el-row style="width: 100%;" :gutter="20">
+                    <el-col :span="8">
+                        <el-card class="box-card" id="card" style="display:none;">
+                            <div slot="header" class="clearfix">
+                                <span>Specific Conclusion</span>
+
+                            </div>
+                            <el-row>
+                                <el-col :span="12">
+                                    <div id="specNode"></div>
+                                </el-col>
+                                <el-col :span="12">
+                                    <div>Based on the chart, it can be concluded that if you follow selected accounts on
+                                        Twitter, your news feed may be lacking in these listed categories on the left.
+                                    </div>
+                                </el-col>
+                            </el-row>
+
+                        </el-card>
+                    </el-col>
+                    <el-col :span="16">
+                        <div :gutter="10" style="width: 100%;">
+                            <el-card id="tableData" style="display:none;" class="box-card">
+                                <el-row :gutter="40">
+                                    <el-col :span="8" class="select">
+                                        <select style="border: 1px solid #333; display:none; width: 100%; height: 30px;"
+                                            name="" id="select" onchange="changeSelect()">
+                                        </select>
+                                        <div style="margin-top: 10px;">
+                                            Suggestion:
+                                        </div>
+                                        <div>
+                                            To make your news feed broader, we recommend that you follow these Twitter
+                                            accounts listed on the right (you can switch between categories from the
+                                            navigation bar above) to ensure that your news feed is comprehensive.
+                                        </div>
+                                    </el-col>
+
+                                    <el-col :span="16">
+                                        <el-row :gutter="10" style="margin: 5px 0">
+                                            <el-col :span="6">Username</el-col>
+                                            <el-col :span="18">Link</el-col>
+                                        </el-row>
+
+                                        <div id="table" style="margin: 5px 0">
+
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                            </el-card>
+                </el-row>
+                </el-col>
+                </el-row>
+            </div>
         </div>
-    </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="assets/js/smoothproducts.min.js"></script>
-    <script src="assets/js/theme.js"></script>
+    </div>
+
 </body>
+<script src="js/vue.js"></script>
+<script src="js/element.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="src/person-service.js"></script>
+<script src="src/store.js"></script>
+<script src="src/charts.js"></script>
+<script src="src/person.js"></script>
+<script src="app.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="assets/js/smoothproducts.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/bs-init.js"></script>
 
 </html>

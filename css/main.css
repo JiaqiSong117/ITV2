@@ -1,0 +1,34 @@
+.main-page {
+  display: flex;
+}
+.bck-blue{
+  background-color: gainsboro;
+}
+
+.person-panel {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 8px;
+}
+
+.results-panel{
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.results-panel-search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ui.search .prompt {
+  border-radius: 0;
+}
+
+.results-default{
+  text-align: center;
+  margin-top: 16px;
+}
